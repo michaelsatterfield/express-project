@@ -4,10 +4,22 @@ const app = express();
 
 const PORT = 5000;
 
+const friends = [
+  {
+    id: 0,
+    name: "Isaac Newton",
+  },
+  {
+    id: 0,
+    name: "Albert Einstein",
+  },
+];
+
 //express app function
 
-app.get("/1", (req, res) => {
-  res.send("test1");
+//route handlers
+app.get("/friends", (req, res) => {
+  res.send(friends);
 });
 
 app.get("/2", (req, res) => {
