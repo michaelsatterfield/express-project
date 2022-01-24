@@ -14,10 +14,14 @@ const friends = [
     name: "Albert Einstein",
   },
 ];
-//custom middleware
 
+//custom middleware
 app.use((req, res, next) => {
-  console.log(``);
+  //log time taken for response
+  const start = Date.now();
+  console.log(`${(req.method, req.url)}`);
+  next();
+  const delta = Date.now() - start;
 });
 
 //express app function
