@@ -14,6 +14,11 @@ const friends = [
     name: "Albert Einstein",
   },
 ];
+//custom middleware
+
+app.use((req, res, next) => {
+  console.log(``);
+});
 
 //express app function
 
@@ -22,17 +27,19 @@ app.get("/friends", (req, res) => {
   res.json(friends);
 });
 
-app.get("/friends/:id", (req,res) => {
-const id = Number(req.params.id);
-const friend = friends[id];
-//if friend is found return the friend json object
-if(friend) {
+app.get("/friends/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const friend = friends[id];
+  //if friend is found return the friend json object
+  if (friend) {
     res.json(friend);
-} else {
+  } else {
     res.status(404).json({
-        error: "This friend does not exist"
-    })
-}
+      error: "This friend does not exist",
+    });
+  }
+});
+
 app.get("/2", (req, res) => {
   res.send("<h1>hello tester person!</h1>");
 });
