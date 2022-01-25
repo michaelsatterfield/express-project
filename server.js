@@ -19,9 +19,9 @@ const friends = [
 app.use((req, res, next) => {
   //log time taken for response
   const start = Date.now();
-  console.log(`${(req.method, req.url)}`);
   next();
   const delta = Date.now() - start;
+  console.log(`${req.method} ${req.url}  ${delta}ms`);
 });
 
 //express app function
