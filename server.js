@@ -10,7 +10,7 @@ const friends = [
     name: "Isaac Newton",
   },
   {
-    id: 0,
+    id: 1,
     name: "Albert Einstein",
   },
 ];
@@ -26,7 +26,28 @@ app.use((req, res, next) => {
 
 //express app function
 
+//parsing middleware
+app.use(express.json());
+
 //route handlers
+//....post request
+app.post("/friends", (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).json({
+      error: "Missing name",
+    });
+  }
+  const newFriend = {
+    name: req.body.name,
+    id: friends.length,
+  };
+  //pushes to new friend array
+  friends.push(newFriend);
+  //responds with json
+  res.json(newFriend);
+});
+
+// ...get request
 app.get("/friends", (req, res) => {
   res.json(friends);
 });
