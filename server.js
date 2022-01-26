@@ -22,10 +22,13 @@ app.use((req, res, next) => {
 //parsing middleware
 app.use(express.json());
 
+//express router middleware
+const friendsRouter = express.Router();
+
 //route handlers...controllers
-app.post("/friends", friendsController.postFriend);
-app.get("/friends", friendsController.getFriends);
-app.get("/friends/:id", friendsController.getFriend);
+friendsRouter.post("/friends", friendsController.postFriend);
+friendsRouter.get("/friends", friendsController.getFriends);
+friendsRouter.get("/friends/:id", friendsController.getFriend);
 
 app.get("/messages", messagesController.getMessage);
 app.post("/messages", messagesController.postMessage);

@@ -10,6 +10,7 @@ function postFriend(req, res) {
     });
   }
 
+  //json object...the view for now
   const newFriend = {
     name: req.body.name,
     id: model.length,
