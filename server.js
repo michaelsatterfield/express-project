@@ -1,5 +1,9 @@
 const express = require("express");
 
+//controller imports
+const friendsController = require("./controllers/friends.controller");
+const messagesController = require("./controllers/messages.controller");
+
 const app = express();
 
 const PORT = 5000;
@@ -28,8 +32,7 @@ app.use((req, res, next) => {
 
 //parsing middleware
 app.use(express.json());
-
-//route handlers
+//route handlers...controllers
 //....post request
 app.post("/friends", (req, res) => {
   if (!req.body.name) {
@@ -65,13 +68,9 @@ app.get("/friends/:id", (req, res) => {
   }
 });
 
-app.get("/2", (req, res) => {
-  res.send("<h1>hello tester person!</h1>");
-});
+app.get("/messages", messagesController.getMessage);
 
-app.post("/3", (req, res) => {
-  console.log("test!");
-});
+app.post("/messages", messagesController.postMessage);
 
 //runs on port, callback that runs when server starts
 app.listen(PORT, () => {
