@@ -1,7 +1,7 @@
+//imports
 const express = require("express");
 
-//controller imports
-const friendsController = require("./controllers/friends.controller");
+const friendsRouter = require("./routes/friends.router");
 const messagesController = require("./controllers/messages.controller");
 
 const app = express();
@@ -22,13 +22,8 @@ app.use((req, res, next) => {
 //parsing middleware
 app.use(express.json());
 
-//express router middleware
-const friendsRouter = express.Router();
-
-//route handlers...controllers
-friendsRouter.post("/friends", friendsController.postFriend);
-friendsRouter.get("/friends", friendsController.getFriends);
-friendsRouter.get("/friends/:id", friendsController.getFriend);
+//mount the friendsRouter
+app.use("/friends", friendsRouter);
 
 app.get("/messages", messagesController.getMessage);
 app.post("/messages", messagesController.postMessage);
