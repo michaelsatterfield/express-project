@@ -1,5 +1,6 @@
 //imports
 const express = require("express");
+const path = require("path");
 
 const friendsRouter = require("./routes/friends.router");
 const messagesRouter = require("./routes/messages.router");
@@ -17,7 +18,8 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.baseUrl} ${req.url}  ${delta}ms`);
 });
 
-//express app function
+//express static file middleware.....serves up webpage from frontend
+app.use("/site", express.static(path.join(__dirname, "public")));
 
 //parsing middleware
 app.use(express.json());
