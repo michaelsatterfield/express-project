@@ -9,6 +9,8 @@ const app = express();
 
 //sets engine for handlebars templating addon
 app.set("view engine", "hbs");
+//set 'views' express parameter and path
+app.set("views", path.join(__dirname, "views"));
 
 const PORT = 5000;
 
@@ -30,6 +32,14 @@ app.use(express.json());
 //mount the routers
 app.use("/friends", friendsRouter);
 app.use("/messages", messagesRouter);
+
+// path to render handlebars front end view
+app.get("/", (req, res) => {
+  res.render("index", {
+    title: "My friends are very clever!",
+    caption: "France is pretty!",
+  });
+});
 
 //runs on port, callback that runs when server starts
 app.listen(PORT, () => {
