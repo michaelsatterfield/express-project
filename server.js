@@ -7,6 +7,9 @@ const messagesRouter = require("./routes/messages.router");
 
 const app = express();
 
+//sets engine for handlebars templating addon
+app.set("view engine", "hbs");
+
 const PORT = 5000;
 
 //custom middleware
@@ -18,7 +21,7 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.baseUrl} ${req.url}  ${delta}ms`);
 });
 
-//express static file middleware.....serves up webpage from frontend
+//express static file middleware.....serves up webpage from frontend ..path.join for absolute path
 app.use("/site", express.static(path.join(__dirname, "public")));
 
 //parsing middleware
