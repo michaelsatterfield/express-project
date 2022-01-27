@@ -2,7 +2,7 @@
 const express = require("express");
 
 const friendsRouter = require("./routes/friends.router");
-const messagesController = require("./controllers/messages.controller");
+const messagesRouter = require("./routes/messages.router");
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use((req, res, next) => {
   const start = Date.now();
   next();
   const delta = Date.now() - start;
-  console.log(`${req.method} ${req.url}  ${delta}ms`);
+  console.log(`${req.method} ${req.baseUrl} ${req.url}  ${delta}ms`);
 });
 
 //express app function
@@ -22,11 +22,9 @@ app.use((req, res, next) => {
 //parsing middleware
 app.use(express.json());
 
-//mount the friendsRouter
+//mount the routers
 app.use("/friends", friendsRouter);
-
-app.get("/messages", messagesController.getMessage);
-app.post("/messages", messagesController.postMessage);
+app.use("/messages", messagesRouter);
 
 //runs on port, callback that runs when server starts
 app.listen(PORT, () => {
